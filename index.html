@@ -9,11 +9,13 @@
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
+            --navy-deep: #0F2A4A;
             --blue-deep: #1a365d;
             --blue-primary: #2563eb;
-            --blue-accent: #3b82f6;
+            --teal-accent: #36B5B0;
             --blue-light: #dbeafe;
             --blue-pale: #eff6ff;
+            --teal-pale: #e6f7f6;
             --white: #ffffff;
             --white-off: #f8fafc;
         }
@@ -95,18 +97,14 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 64px;
-            height: 64px;
-            background: linear-gradient(135deg, var(--blue-primary) 0%, var(--blue-accent) 100%);
-            border-radius: 16px;
+            width: 80px;
+            height: 80px;
             margin-bottom: 24px;
-            box-shadow: 0 8px 32px rgba(37, 99, 235, 0.25);
         }
 
         .logo-mark svg {
-            width: 32px;
-            height: 32px;
-            fill: var(--white);
+            width: 80px;
+            height: 80px;
         }
 
         h1 {
@@ -121,8 +119,7 @@
         .subtitle {
             font-size: 1.125rem;
             font-weight: 300;
-            color: var(--blue-primary);
-            opacity: 0.8;
+            color: var(--teal-accent);
         }
 
         /* Project Boxes Grid */
@@ -170,7 +167,7 @@
             left: 0;
             right: 0;
             height: 4px;
-            background: linear-gradient(90deg, var(--blue-primary), var(--blue-accent));
+            background: linear-gradient(90deg, var(--navy-deep), var(--teal-accent));
             opacity: 0;
             transition: opacity 0.3s ease;
         }
@@ -192,8 +189,8 @@
             justify-content: center;
             width: 40px;
             height: 40px;
-            background: var(--blue-pale);
-            color: var(--blue-primary);
+            background: var(--teal-pale);
+            color: var(--teal-accent);
             font-weight: 600;
             font-size: 1rem;
             border-radius: 12px;
@@ -253,8 +250,15 @@
     <div class="container">
         <header>
             <div class="logo-mark">
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+                <svg viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Top left teal comma/curve -->
+                    <path d="M12 4 C6 4, 4 8, 4 12 C4 16, 6 20, 10 20 C10 14, 12 10, 16 8 C16 6, 14 4, 12 4Z" fill="#36B5B0"/>
+                    <!-- Top right navy dot -->
+                    <ellipse cx="38" cy="10" rx="6" ry="8" fill="#0F2A4A"/>
+                    <!-- Middle navy leaf -->
+                    <path d="M18 22 C12 24, 10 30, 12 36 C14 42, 20 44, 26 42 C22 38, 20 32, 22 26 C24 22, 22 20, 18 22Z" fill="#0F2A4A"/>
+                    <!-- Bottom right teal leaf -->
+                    <path d="M32 28 C28 30, 30 36, 34 42 C38 48, 44 48, 46 44 C42 42, 38 38, 36 32 C34 28, 34 26, 32 28Z" fill="#36B5B0" transform="rotate(15, 38, 38)"/>
                 </svg>
             </div>
             <h1>Organic Team Projects</h1>
