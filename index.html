@@ -18,6 +18,30 @@
             --teal-pale: #e6f7f6;
             --white: #ffffff;
             --white-off: #f8fafc;
+            --bg-gradient: linear-gradient(135deg, var(--white) 0%, var(--blue-pale) 50%, var(--blue-light) 100%);
+            --card-bg: var(--white);
+            --card-border: rgba(219, 234, 254, 0.8);
+            --text-primary: var(--blue-deep);
+            --text-secondary: var(--navy-deep);
+            --shadow-color: rgba(26, 54, 93, 0.08);
+        }
+
+        [data-theme="dark"] {
+            --navy-deep: #e2e8f0;
+            --blue-deep: #e2e8f0;
+            --blue-primary: #60a5fa;
+            --teal-accent: #5eead4;
+            --blue-light: #1e293b;
+            --blue-pale: #0f172a;
+            --teal-pale: rgba(94, 234, 212, 0.1);
+            --white: #1e293b;
+            --white-off: #0f172a;
+            --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+            --card-bg: #1e293b;
+            --card-border: rgba(100, 116, 139, 0.3);
+            --text-primary: #e2e8f0;
+            --text-secondary: #f1f5f9;
+            --shadow-color: rgba(0, 0, 0, 0.3);
         }
 
         * {
@@ -28,9 +52,10 @@
 
         body {
             font-family: 'Outfit', sans-serif;
-            background: linear-gradient(135deg, var(--white) 0%, var(--blue-pale) 50%, var(--blue-light) 100%);
+            background: var(--bg-gradient);
             min-height: 100vh;
-            color: var(--blue-deep);
+            color: var(--text-primary);
+            transition: background 0.3s ease, color 0.3s ease;
         }
 
         /* Decorative background elements */
@@ -131,14 +156,14 @@
         }
 
         .project-box {
-            background: var(--white);
+            background: var(--card-bg);
             border-radius: 24px;
             padding: 40px 32px;
             min-height: 280px;
             box-shadow: 
-                0 4px 6px rgba(26, 54, 93, 0.04),
-                0 12px 40px rgba(26, 54, 93, 0.08);
-            border: 1px solid rgba(219, 234, 254, 0.8);
+                0 4px 6px var(--shadow-color),
+                0 12px 40px var(--shadow-color);
+            border: 1px solid var(--card-border);
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
@@ -254,9 +279,10 @@
 
         .value-item {
             padding: 24px 20px;
-            background: rgba(255, 255, 255, 0.6);
+            background: var(--card-bg);
             border-radius: 16px;
-            border: 1px solid rgba(54, 181, 176, 0.15);
+            border: 1px solid var(--card-border);
+            transition: background 0.3s ease, border-color 0.3s ease;
         }
 
         .value-icon {
@@ -297,6 +323,111 @@
             text-transform: uppercase;
         }
 
+        /* Dark Mode Toggle */
+        .theme-toggle {
+            position: fixed;
+            top: 24px;
+            right: 24px;
+            z-index: 100;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 50px;
+            padding: 8px 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            box-shadow: 0 4px 12px var(--shadow-color);
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px var(--shadow-color);
+        }
+
+        .theme-toggle .icon {
+            font-size: 1.125rem;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            margin-top: 80px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .faq-section .section-label {
+            margin-bottom: 32px;
+        }
+
+        .faq-item {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            margin-bottom: 16px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            box-shadow: 0 4px 20px var(--shadow-color);
+        }
+
+        .faq-question {
+            width: 100%;
+            padding: 24px;
+            background: none;
+            border: none;
+            text-align: left;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            transition: color 0.3s ease;
+        }
+
+        .faq-question:hover {
+            color: var(--teal-accent);
+        }
+
+        .faq-question .chevron {
+            font-size: 1.25rem;
+            transition: transform 0.3s ease;
+            color: var(--teal-accent);
+        }
+
+        .faq-item.active .faq-question .chevron {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 300px;
+        }
+
+        .faq-answer-content {
+            padding: 0 24px 24px;
+            font-size: 1rem;
+            font-weight: 300;
+            color: var(--text-primary);
+            opacity: 0.8;
+            line-height: 1.7;
+        }
+
         /* Footer */
         footer {
             text-align: center;
@@ -304,7 +435,7 @@
             padding: 24px;
             opacity: 0.6;
             font-size: 0.875rem;
-            color: var(--blue-deep);
+            color: var(--text-primary);
         }
 
         /* Responsive */
@@ -325,11 +456,37 @@
                 padding: 32px 24px;
                 min-height: 220px;
             }
+
+            .theme-toggle {
+                top: 16px;
+                right: 16px;
+                padding: 8px 12px;
+                font-size: 0.8rem;
+            }
+
+            .theme-toggle .label {
+                display: none;
+            }
+
+            .faq-question {
+                padding: 20px;
+                font-size: 1rem;
+            }
+
+            .faq-answer-content {
+                padding: 0 20px 20px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="bg-decoration"></div>
+    
+    <!-- Dark Mode Toggle -->
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
+        <span class="icon">🌙</span>
+        <span class="label">Dark</span>
+    </button>
     
     <div class="container">
         <header>
@@ -414,10 +571,120 @@
             </a>
         </section>
 
+        <!-- FAQ Section -->
+        <section class="faq-section">
+            <div class="section-label">
+                <span>FAQ</span>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)">
+                    Are these tools really free?
+                    <span class="chevron">▼</span>
+                </button>
+                <div class="faq-answer">
+                    <p class="faq-answer-content">Yes, 100% free! All our tools are completely free to use with no hidden fees, premium tiers, or usage limits. We believe powerful content tools should be accessible to everyone.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)">
+                    Is my content private and secure?
+                    <span class="chevron">▼</span>
+                </button>
+                <div class="faq-answer">
+                    <p class="faq-answer-content">Absolutely. Your content is processed in real-time and is never stored on our servers. We don't track, save, or share any of the content you create. Your data stays yours.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)">
+                    What AI powers these tools?
+                    <span class="chevron">▼</span>
+                </button>
+                <div class="faq-answer">
+                    <p class="faq-answer-content">Our tools are powered by Claude AI from Anthropic — one of the most advanced and safety-focused AI models available. This ensures high-quality, helpful content generation.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)">
+                    Do I need to create an account?
+                    <span class="chevron">▼</span>
+                </button>
+                <div class="faq-answer">
+                    <p class="faq-answer-content">No registration required! Simply visit any of our tools and start creating immediately. No email, no password, no friction — just instant access to powerful content tools.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)">
+                    Can I use the generated content commercially?
+                    <span class="chevron">▼</span>
+                </button>
+                <div class="faq-answer">
+                    <p class="faq-answer-content">Yes! All content generated by our tools is yours to use however you like — for personal projects, business marketing, client work, or any other purpose. No attribution required.</p>
+                </div>
+            </div>
+        </section>
+
         <footer>
             &copy; 2026 Organic Team Projects
         </footer>
     </div>
+
+    <script>
+        // Dark Mode Toggle
+        function toggleTheme() {
+            const body = document.body;
+            const toggle = document.querySelector('.theme-toggle');
+            const icon = toggle.querySelector('.icon');
+            const label = toggle.querySelector('.label');
+            
+            if (body.getAttribute('data-theme') === 'dark') {
+                body.removeAttribute('data-theme');
+                icon.textContent = '🌙';
+                label.textContent = 'Dark';
+                localStorage.setItem('theme', 'light');
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                icon.textContent = '☀️';
+                label.textContent = 'Light';
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        // Check for saved theme preference
+        (function() {
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            
+            if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+                document.body.setAttribute('data-theme', 'dark');
+                const toggle = document.querySelector('.theme-toggle');
+                if (toggle) {
+                    toggle.querySelector('.icon').textContent = '☀️';
+                    toggle.querySelector('.label').textContent = 'Light';
+                }
+            }
+        })();
+
+        // FAQ Accordion
+        function toggleFaq(button) {
+            const faqItem = button.parentElement;
+            const isActive = faqItem.classList.contains('active');
+            
+            // Close all FAQ items
+            document.querySelectorAll('.faq-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Open clicked item if it wasn't already open
+            if (!isActive) {
+                faqItem.classList.add('active');
+            }
+        }
+    </script>
 </body>
 </html>
 
