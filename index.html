@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Organic Team Projects</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --blue-deep: #1a365d;
+            --blue-primary: #2563eb;
+            --blue-accent: #3b82f6;
+            --blue-light: #dbeafe;
+            --blue-pale: #eff6ff;
+            --white: #ffffff;
+            --white-off: #f8fafc;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: linear-gradient(135deg, var(--white) 0%, var(--blue-pale) 50%, var(--blue-light) 100%);
+            min-height: 100vh;
+            color: var(--blue-deep);
+        }
+
+        /* Decorative background elements */
+        .bg-decoration {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .bg-decoration::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .bg-decoration::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(37, 99, 235, 0.06) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 24px;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            margin-bottom: 80px;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .logo-mark {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, var(--blue-primary) 0%, var(--blue-accent) 100%);
+            border-radius: 16px;
+            margin-bottom: 24px;
+            box-shadow: 0 8px 32px rgba(37, 99, 235, 0.25);
+        }
+
+        .logo-mark svg {
+            width: 32px;
+            height: 32px;
+            fill: var(--white);
+        }
+
+        h1 {
+            font-family: 'DM Serif Display', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 400;
+            color: var(--blue-deep);
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+        }
+
+        .subtitle {
+            font-size: 1.125rem;
+            font-weight: 300;
+            color: var(--blue-primary);
+            opacity: 0.8;
+        }
+
+        /* Project Boxes Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 32px;
+            margin-top: 40px;
+        }
+
+        .project-box {
+            background: var(--white);
+            border-radius: 24px;
+            padding: 40px 32px;
+            min-height: 280px;
+            box-shadow: 
+                0 4px 6px rgba(26, 54, 93, 0.04),
+                0 12px 40px rgba(26, 54, 93, 0.08);
+            border: 1px solid rgba(219, 234, 254, 0.8);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 0.6s ease-out backwards;
+        }
+
+        .project-box:nth-child(1) { animation-delay: 0.1s; }
+        .project-box:nth-child(2) { animation-delay: 0.2s; }
+        .project-box:nth-child(3) { animation-delay: 0.3s; }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .project-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--blue-primary), var(--blue-accent));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .project-box:hover {
+            transform: translateY(-8px);
+            box-shadow: 
+                0 8px 12px rgba(26, 54, 93, 0.06),
+                0 24px 60px rgba(26, 54, 93, 0.12);
+        }
+
+        .project-box:hover::before {
+            opacity: 1;
+        }
+
+        .box-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: var(--blue-pale);
+            color: var(--blue-primary);
+            font-weight: 600;
+            font-size: 1rem;
+            border-radius: 12px;
+            margin-bottom: 24px;
+        }
+
+        .project-box h2 {
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: var(--blue-deep);
+            margin-bottom: 12px;
+        }
+
+        .project-box p {
+            font-size: 1rem;
+            font-weight: 300;
+            color: var(--blue-deep);
+            opacity: 0.7;
+            line-height: 1.7;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: 80px;
+            padding: 24px;
+            opacity: 0.6;
+            font-size: 0.875rem;
+            color: var(--blue-deep);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 40px 16px;
+            }
+
+            header {
+                margin-bottom: 48px;
+            }
+
+            .projects-grid {
+                gap: 24px;
+            }
+
+            .project-box {
+                padding: 32px 24px;
+                min-height: 220px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-decoration"></div>
+    
+    <div class="container">
+        <header>
+            <div class="logo-mark">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+                </svg>
+            </div>
+            <h1>Organic Team Projects</h1>
+            <p class="subtitle">Collaborate. Create. Grow Together.</p>
+        </header>
+
+        <section class="projects-grid">
+            <!-- Box 1 -->
+            <article class="project-box">
+                <span class="box-number">01</span>
+                <h2>Project Title One</h2>
+                <p>Add your project description here. This space is ready for your content about the first team initiative.</p>
+            </article>
+
+            <!-- Box 2 -->
+            <article class="project-box">
+                <span class="box-number">02</span>
+                <h2>Project Title Two</h2>
+                <p>Add your project description here. This space is ready for your content about the second team initiative.</p>
+            </article>
+
+            <!-- Box 3 -->
+            <article class="project-box">
+                <span class="box-number">03</span>
+                <h2>Project Title Three</h2>
+                <p>Add your project description here. This space is ready for your content about the third team initiative.</p>
+            </article>
+        </section>
+
+        <footer>
+            &copy; 2026 Organic Team Projects
+        </footer>
+    </div>
+</body>
+</html>
+
