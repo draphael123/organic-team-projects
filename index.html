@@ -220,6 +220,83 @@
             line-height: 1.7;
         }
 
+        /* Value Proposition Section */
+        .value-section {
+            text-align: center;
+            margin-bottom: 60px;
+            animation: fadeInDown 0.8s ease-out 0.2s backwards;
+        }
+
+        .value-section h2 {
+            font-family: 'DM Serif Display', serif;
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            color: var(--navy-deep);
+            margin-bottom: 16px;
+        }
+
+        .value-intro {
+            font-size: 1.125rem;
+            font-weight: 300;
+            color: var(--blue-deep);
+            max-width: 700px;
+            margin: 0 auto 40px;
+            line-height: 1.8;
+            opacity: 0.85;
+        }
+
+        .value-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 24px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .value-item {
+            padding: 24px 20px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 16px;
+            border: 1px solid rgba(54, 181, 176, 0.15);
+        }
+
+        .value-icon {
+            font-size: 2rem;
+            margin-bottom: 12px;
+        }
+
+        .value-item h3 {
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.125rem;
+            color: var(--navy-deep);
+            margin-bottom: 8px;
+        }
+
+        .value-item p {
+            font-size: 0.9rem;
+            font-weight: 300;
+            color: var(--blue-deep);
+            opacity: 0.7;
+            line-height: 1.6;
+        }
+
+        /* Section Divider */
+        .section-label {
+            text-align: center;
+            margin-bottom: 16px;
+        }
+
+        .section-label span {
+            display: inline-block;
+            padding: 8px 20px;
+            background: var(--teal-pale);
+            color: var(--teal-accent);
+            font-weight: 500;
+            font-size: 0.875rem;
+            border-radius: 20px;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
         /* Footer */
         footer {
             text-align: center;
@@ -271,6 +348,41 @@
             <h1>Organic Team Projects</h1>
             <p class="subtitle">Collaborate. Create. Grow Together.</p>
         </header>
+
+        <!-- Value Proposition -->
+        <section class="value-section">
+            <h2>Free Tools That Save You Hours Every Week</h2>
+            <p class="value-intro">
+                Our suite of AI-powered content tools helps creators, marketers, and teams produce professional-quality content without the steep learning curve or expensive subscriptions.
+            </p>
+            <div class="value-grid">
+                <div class="value-item">
+                    <div class="value-icon">⚡</div>
+                    <h3>Lightning Fast</h3>
+                    <p>Generate weeks of content in minutes. No more staring at blank screens.</p>
+                </div>
+                <div class="value-item">
+                    <div class="value-icon">🎯</div>
+                    <h3>Platform-Optimized</h3>
+                    <p>Content tailored for each platform's unique format, style, and audience.</p>
+                </div>
+                <div class="value-item">
+                    <div class="value-icon">🔒</div>
+                    <h3>100% Free & Private</h3>
+                    <p>No registration, no hidden fees, no data storage. Just powerful tools.</p>
+                </div>
+                <div class="value-item">
+                    <div class="value-icon">🚀</div>
+                    <h3>Grow Your Reach</h3>
+                    <p>More content, more consistency, more engagement across all channels.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <div class="section-label">
+            <span>Our Tools</span>
+        </div>
 
         <section class="projects-grid">
             <!-- Box 1 -->
