@@ -174,6 +174,7 @@
         .project-box:nth-child(2) { animation-delay: 0.2s; }
         .project-box:nth-child(3) { animation-delay: 0.3s; }
         .project-box:nth-child(4) { animation-delay: 0.4s; }
+        .project-box:nth-child(5) { animation-delay: 0.5s; }
 
         a.project-box {
             text-decoration: none;
@@ -227,6 +228,22 @@
             font-size: 1rem;
             border-radius: 12px;
             margin-bottom: 24px;
+        }
+
+        .status-badge {
+            display: inline-block;
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            padding: 6px 12px;
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border-radius: 20px;
+            box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);
         }
 
         .project-box h2 {
@@ -568,6 +585,14 @@
                 <span class="box-number">04</span>
                 <h2>Master Convert</h2>
                 <p>60+ free online tools for files, images, PDFs, and content creation. Merge, split, compress PDFs, resize images, generate hashtags, and more — all privacy-focused with no registration required.</p>
+            </a>
+
+            <!-- Box 5 -->
+            <a href="https://clipcraft-ai-two.vercel.app/" target="_blank" class="project-box">
+                <span class="box-number">05</span>
+                <span class="status-badge">In Development</span>
+                <h2>ClipCraft AI</h2>
+                <p>AI-powered video editing made simple. Smart cutting, auto captions, color grading, and multi-platform export. Edit videos 10x faster with natural language commands.</p>
             </a>
         </section>
 
