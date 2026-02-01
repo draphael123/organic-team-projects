@@ -83,6 +83,18 @@
             top: 16px;
         }
 
+        .visually-hidden {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
         body {
             font-family: 'Outfit', sans-serif;
             background: var(--bg-gradient);
@@ -209,6 +221,10 @@
         .project-box:nth-child(4) { animation-delay: 0.4s; }
         .project-box:nth-child(5) { animation-delay: 0.5s; }
         .project-box:nth-child(6) { animation-delay: 0.6s; }
+
+        .project-box.filtered-out {
+            display: none;
+        }
 
         a.project-box {
             text-decoration: none;
@@ -372,6 +388,93 @@
             border-radius: 20px;
             letter-spacing: 0.05em;
             text-transform: uppercase;
+        }
+
+        /* Search and Category Filter */
+        .tools-filter {
+            margin-bottom: 32px;
+            padding: 24px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            box-shadow: 0 4px 6px var(--shadow-color);
+        }
+
+        .tools-search-input {
+            width: 100%;
+            max-width: 480px;
+            padding: 14px 20px;
+            margin-bottom: 20px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1rem;
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            background: var(--white-off);
+            color: var(--text-primary);
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .tools-search-input:focus {
+            outline: none;
+            border-color: var(--teal-accent);
+            box-shadow: 0 0 0 3px rgba(236, 72, 153, 0.2);
+        }
+
+        .tools-search-input::placeholder {
+            color: var(--text-primary);
+            opacity: 0.5;
+        }
+
+        .category-filters {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 12px 16px;
+        }
+
+        .category-label {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+
+        .category-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .category-btn {
+            padding: 8px 16px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.875rem;
+            font-weight: 500;
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            background: var(--white-off);
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .category-btn:hover {
+            background: var(--teal-pale);
+            color: var(--teal-accent);
+            border-color: var(--teal-accent);
+        }
+
+        .category-btn.active {
+            background: linear-gradient(135deg, #ec4899, #db2777);
+            color: white;
+            border-color: transparent;
+        }
+
+        .filter-results {
+            margin-top: 12px;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            opacity: 0.85;
+            min-height: 1.4em;
         }
 
         /* Dark Mode Toggle */
@@ -707,6 +810,24 @@
                 width: 44px;
                 height: 44px;
             }
+
+            .tools-filter {
+                padding: 16px;
+                margin-bottom: 24px;
+            }
+
+            .tools-search-input {
+                margin-bottom: 16px;
+            }
+
+            .category-filters {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .category-buttons {
+                width: 100%;
+            }
         }
     </style>
 </head>
@@ -800,9 +921,32 @@
             <span>Our Tools</span>
         </div>
 
-        <section class="projects-grid">
+        <!-- Search and Category Filter -->
+        <div class="tools-filter" role="search" aria-label="Filter and search tools">
+            <label for="tools-search" class="visually-hidden">Search tools by name or description</label>
+            <input type="search" id="tools-search" class="tools-search-input" placeholder="Search tools…" aria-describedby="search-hint" autocomplete="off">
+            <p id="search-hint" class="search-hint visually-hidden">Type to filter tools by name or description</p>
+            <div class="category-filters" role="group" aria-label="Filter by category">
+                <span class="category-label">Category:</span>
+                <div class="category-buttons">
+                    <button type="button" class="category-btn active" data-category="all" aria-pressed="true">All</button>
+                    <button type="button" class="category-btn" data-category="social" aria-pressed="false">Social</button>
+                    <button type="button" class="category-btn" data-category="content" aria-pressed="false">Content</button>
+                    <button type="button" class="category-btn" data-category="images" aria-pressed="false">Images</button>
+                    <button type="button" class="category-btn" data-category="video" aria-pressed="false">Video</button>
+                    <button type="button" class="category-btn" data-category="converters" aria-pressed="false">Converters</button>
+                    <button type="button" class="category-btn" data-category="community" aria-pressed="false">Community</button>
+                    <button type="button" class="category-btn" data-category="ai" aria-pressed="false">AI</button>
+                    <button type="button" class="category-btn" data-category="pdf" aria-pressed="false">PDF</button>
+                    <button type="button" class="category-btn" data-category="influencers" aria-pressed="false">Influencers</button>
+                </div>
+            </div>
+            <p id="filter-results" class="filter-results" aria-live="polite" aria-atomic="true"></p>
+        </div>
+
+        <section class="projects-grid" id="projects-grid">
             <!-- Box 1 -->
-            <a href="https://blog-to-social-converter.vercel.app/" target="_blank" rel="noopener noreferrer" class="project-box">
+            <a href="https://blog-to-social-converter.vercel.app/" target="_blank" rel="noopener noreferrer" class="project-box" data-categories="social converter" data-search="Fountain Social Media Converter blog post TikTok Instagram Facebook LinkedIn YouTube hashtags">
                 <span class="box-number">01</span>
                 <div class="project-tags">
                     <span class="project-tag">Social</span>
@@ -813,7 +957,7 @@
             </a>
 
             <!-- Box 2 -->
-            <a href="https://caption-creator-xi.vercel.app/" target="_blank" rel="noopener noreferrer" class="project-box">
+            <a href="https://caption-creator-xi.vercel.app/" target="_blank" rel="noopener noreferrer" class="project-box" data-categories="social content" data-search="Content Creation Suite captions social media content workflow">
                 <span class="box-number">02</span>
                 <div class="project-tags">
                     <span class="project-tag">Social</span>
@@ -824,7 +968,7 @@
             </a>
 
             <!-- Box 3 -->
-            <a href="https://fountain-influencers.vercel.app/" target="_blank" rel="noopener noreferrer" class="project-box">
+            <a href="https://fountain-influencers.vercel.app/" target="_blank" rel="noopener noreferrer" class="project-box" data-categories="community influencers" data-search="Fountain Influencers landing page influencer community creators">
                 <span class="box-number">03</span>
                 <div class="project-tags">
                     <span class="project-tag">Community</span>
@@ -835,7 +979,7 @@
             </a>
 
             <!-- Box 4 -->
-            <a href="https://masterconvert.vercel.app/" target="_blank" rel="noopener noreferrer" class="project-box">
+            <a href="https://masterconvert.vercel.app/" target="_blank" rel="noopener noreferrer" class="project-box" data-categories="converters pdf images" data-search="Master Convert PDF merge split compress resize images hashtags">
                 <span class="box-number">04</span>
                 <div class="project-tags">
                     <span class="project-tag">Converters</span>
@@ -847,7 +991,7 @@
             </a>
 
             <!-- Box 5 -->
-            <a href="https://clipcraft-ai-two.vercel.app/" target="_blank" rel="noopener noreferrer" class="project-box">
+            <a href="https://clipcraft-ai-two.vercel.app/" target="_blank" rel="noopener noreferrer" class="project-box" data-categories="video ai" data-search="ClipCraft AI video editing captions color grading export">
                 <span class="box-number">05</span>
                 <span class="status-badge">In Development</span>
                 <div class="project-tags">
@@ -858,22 +1002,15 @@
                 <p>AI-powered video editing made simple. Smart cutting, auto captions, color grading, and multi-platform export. Edit videos 10x faster with natural language commands.</p>
             </a>
 
-<<<<<<< HEAD
             <!-- Box 6 -->
-            <a href="https://content-studio-tau.vercel.app?_vercel_share=788zedPObXbruK8WKvYvbxzWiNc9sqgK" target="_blank" rel="noopener noreferrer" class="project-box">
-                <span class="box-number">06</span>
-                <h2>Fountain - Content Studio</h2>
-                <p>Content creator - images</p>
-=======
-            <!-- Box 6 - This site -->
-            <a href="https://vercel.com/daniel-8982s-projects/organic-team-projects" target="_blank" rel="noopener noreferrer" class="project-box">
+            <a href="https://content-studio-tau.vercel.app?_vercel_share=788zedPObXbruK8WKvYvbxzWiNc9sqgK" target="_blank" rel="noopener noreferrer" class="project-box" data-categories="content images" data-search="Fountain Content Studio content creator images">
                 <span class="box-number">06</span>
                 <div class="project-tags">
-                    <span class="project-tag">Meta</span>
+                    <span class="project-tag">Content</span>
+                    <span class="project-tag">Images</span>
                 </div>
-                <h2>Organic Team Projects (this site)</h2>
-                <p>This site is deployed on Vercel. This site does not have save functionality at this time.</p>
->>>>>>> 67909cd32c8332ab7757490c705a719303be7ed7
+                <h2>Fountain - Content Studio</h2>
+                <p>Content creator - images</p>
             </a>
         </section>
 
@@ -1008,6 +1145,68 @@
         function scrollToTop() {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
+
+        // Search and Category Filter
+        (function() {
+            const searchInput = document.getElementById('tools-search');
+            const categoryBtns = document.querySelectorAll('.category-btn');
+            const projectBoxes = document.querySelectorAll('.project-box[data-categories][data-search]');
+            const filterResults = document.getElementById('filter-results');
+
+            function updateFilter() {
+                const query = (searchInput?.value || '').trim().toLowerCase();
+                const activeCategory = document.querySelector('.category-btn.active')?.dataset?.category || 'all';
+
+                let visibleCount = 0;
+
+                projectBoxes.forEach(box => {
+                    const categories = (box.dataset.categories || '').toLowerCase().split(/\s+/);
+                    const searchText = (box.dataset.search || '').toLowerCase();
+                    const title = (box.querySelector('h2')?.textContent || '').toLowerCase();
+                    const desc = (box.querySelector('p')?.textContent || '').toLowerCase();
+                    const searchable = searchText || title + ' ' + desc;
+
+                    const matchesCategory = activeCategory === 'all' || categories.includes(activeCategory);
+                    const matchesSearch = !query || searchable.includes(query);
+
+                    const show = matchesCategory && matchesSearch;
+                    box.classList.toggle('filtered-out', !show);
+                    if (show) visibleCount++;
+                });
+
+                if (filterResults) {
+                    const total = projectBoxes.length;
+                    if (query || activeCategory !== 'all') {
+                        filterResults.textContent = `Showing ${visibleCount} of ${total} tools`;
+                    } else {
+                        filterResults.textContent = '';
+                    }
+                }
+            }
+
+            searchInput?.addEventListener('input', updateFilter);
+            searchInput?.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    searchInput.value = '';
+                    searchInput.focus();
+                    updateFilter();
+                }
+            });
+
+            categoryBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    categoryBtns.forEach(b => {
+                        b.classList.remove('active');
+                        b.setAttribute('aria-pressed', 'false');
+                    });
+                    this.classList.add('active');
+                    this.setAttribute('aria-pressed', 'true');
+                    updateFilter();
+                });
+            });
+
+            updateFilter();
+        })();
     </script>
 </body>
 </html>
